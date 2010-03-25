@@ -1,5 +1,5 @@
 Name:           python-openid
-Version:        2.0.1
+Version:        2.2.4
 Release:        %mkrel 1
 Summary:        Python OpenID libraries
 Group:          Development/Python
@@ -10,7 +10,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch:      noarch
 BuildRequires:	python-setuptools
 BuildRequires:	python-devel
-
+BuildRequires:	twill
 %description
 The OpenID library with batteries included.
 
