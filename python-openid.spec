@@ -1,16 +1,16 @@
-Name:           python-openid
-Version:        2.2.4
-Release:        %mkrel 1
-Summary:        Python OpenID libraries
-Group:          Development/Python
-License:        Apache License
-URL:            http://www.openidenabled.com/python-openid/
+Name:		python-openid
+Version:	2.2.5
+Release:	1
+Summary:	Python OpenID libraries
+Group:		Development/Python
+License:	Apache License
+URL:		http://www.openidenabled.com/python-openid/
 Source0:	http://openidenabled.com/files/python-openid/packages/python-openid-%{version}.tar.bz2
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildArch:      noarch
+BuildArch:	noarch
 BuildRequires:	python-setuptools
 BuildRequires:	python-devel
-BuildRequires:	twill
+#BuildRequires:	twill
+
 %description
 The OpenID library with batteries included.
 
@@ -34,26 +34,20 @@ Features of the 2.x.x series include:
 
 
 %prep
-%setup -q 
+%setup -q
 find . -type f | xargs chmod a-x
 
 %build
-%{__python} -c 'import setuptools; execfile("setup.py")' build
+python -c 'import setuptools; execfile("setup.py")' build
 
 %check
-%{__python} admin/runtests
+#python admin/runtests
 
 %install
-rm -rf %{buildroot}
-%{__python} -c 'import setuptools; execfile("setup.py")' install \
+python -c 'import setuptools; execfile("setup.py")' install \
 	--skip-build --root %{buildroot} --record=INSTALLED_FILES
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root,-)
-%doc background-associations.txt CHANGELOG LICENSE NEWS README doc examples
+%doc background-associations.txt LICENSE NEWS README examples
 %{python_sitelib}/*
-
 
