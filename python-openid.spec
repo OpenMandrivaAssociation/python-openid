@@ -1,6 +1,6 @@
 Name:		python-openid
 Version:	2.2.5
-Release:	2
+Release:	3
 Summary:	Python OpenID libraries
 Group:		Development/Python
 License:	Apache License
