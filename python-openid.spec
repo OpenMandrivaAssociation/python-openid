@@ -1,11 +1,11 @@
 Name:		python-openid
-Version:	2.2.5
-Release:	3
+Version:	3.0.9
+Release:	1
 Summary:	Python OpenID libraries
 Group:		Development/Python
 License:	Apache License
-URL:		http://www.openidenabled.com/python-openid/
-Source0:	http://openidenabled.com/files/python-openid/packages/python-openid-%{version}.tar.bz2
+URL:		https://github.com/necaris/python3-openid/releases
+Source0:	http://openidenabled.com/files/python-openid/packages/python3-openid-%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:	python-setuptools
 BuildRequires:	python-devel
@@ -34,20 +34,20 @@ Features of the 2.x.x series include:
 
 
 %prep
-%setup -q
+%setup -qn python3-openid-%{version}
 find . -type f | xargs chmod a-x
 
 %build
-python -c 'import setuptools; execfile("setup.py")' build
+python setup.py build
 
 %check
 #python admin/runtests
 
 %install
-python -c 'import setuptools; execfile("setup.py")' install \
+python setup.py install \
 	--skip-build --root %{buildroot} --record=INSTALLED_FILES
 
 %files
-%doc background-associations.txt LICENSE NEWS README examples
+%doc background-associations.txt LICENSE NEWS.md README.md examples
 %{python_sitelib}/*
 
