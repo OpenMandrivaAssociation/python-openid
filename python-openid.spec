@@ -1,53 +1,37 @@
+%define module openid
+%define oname python3_openid
+
 Name:		python-openid
-Version:	3.0.9
-Release:	1
 Summary:	Python OpenID libraries
+Version:	3.2.0
+Release:	1
+License:	Apache-2.0
 Group:		Development/Python
-License:	Apache License
-URL:		https://github.com/necaris/python3-openid/releases
-Source0:	http://openidenabled.com/files/python-openid/packages/python3-openid-%{version}.tar.gz
+URL:		https://github.com/necaris/python3-openid
+Source0:	%{URL}/archive/v%{version}/%{name}-%{version}.tar.gz
+
+BuildSystem:  python
 BuildArch:	noarch
-BuildRequires:	python-setuptools
-BuildRequires:	python-devel
-#BuildRequires:	twill
+BuildRequires:	pkgconfig(python3)
+BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(wheel)
+
+# Obsolete py2 module to redirect to this python 3 module
+%rename python2-openid
 
 %description
-The OpenID library with batteries included.
+This started out as a fork of the Python OpenID library, with changes to
+make it Python 3 compatible.
 
-Features of the 2.x.x series include:
+It's now a port of that library, including cleanups and updates to the
+code in general.
 
- * Refined and easy-to-use API.
-
- * Extensive documentation.
-
- * Many storage implemetations including file-based, sqlite,
-   postgresql, and mysql.
-
- * Simple examples to help you get started.
-
- * Licensed under the Apache Software License.
-
- * Includes a Simple Registration API
-
- * Versions 1.x.x supports protocol version 1; versions 2.x.x support
-   both major OpenID protocol versions transparently
-
-
-%prep
-%setup -qn python3-openid-%{version}
-find . -type f | xargs chmod a-x
-
-%build
-python setup.py build
-
-%check
-#python admin/runtests
-
-%install
-python setup.py install \
-	--skip-build --root %{buildroot} --record=INSTALLED_FILES
+%prep -a
+# Remove bundled egg-info
+rm -rf %{oname}.egg-info
 
 %files
-%doc background-associations.txt LICENSE NEWS.md README.md examples
-%{python_sitelib}/*
-
+%doc background-associations.txt README.md NEWS.md examples
+%{python_sitelib}/%{module}
+%{python_sitelib}/%{oname}-%{version}*.*-info
