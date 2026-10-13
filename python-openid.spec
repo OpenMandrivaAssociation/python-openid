@@ -4,7 +4,7 @@
 Name:		python-openid
 Summary:	Python OpenID libraries
 Version:	3.2.0
-Release:	1
+Release:	2
 License:	Apache-2.0
 Group:		Development/Python
 URL:		https://github.com/necaris/python3-openid
